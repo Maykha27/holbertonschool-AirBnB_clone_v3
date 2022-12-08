@@ -10,8 +10,11 @@ from models import storage
 app = Flask(__name__)
 
 app.register_blueprint(app_views)
-app.teardown_appcontext(storage.close)
 
+@app.teardown_appcontext(storage.close)
+def close():
+    """close session when finished"""
+    storage.close()
 
 @app.errorhandler(404)
 def invalid_route(e):
