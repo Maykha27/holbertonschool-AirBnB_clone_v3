@@ -19,6 +19,7 @@ def close():
 
 @app.errorhandler(404)
 def invalid_route(e):
+    """handle 404 error"""
     return ({"error": "Not found"}, 404)
 
 if __name__ == "__main__":
