@@ -65,7 +65,7 @@ def putinV():
 @app_views.route('/states/<state_id>', methods=['DELETE'],
                  strict_slashes=False)
 def deleting():
-    ''' to delete an onbject'''
+    """to delete an onbject"""
     stateObject = storage.get(State, state_id)
     if stateObject is None:
         abort(404)
