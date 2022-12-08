@@ -85,3 +85,4 @@ class DBStorage:
         if other:
             print(other)
         self.__session.remove()
+
