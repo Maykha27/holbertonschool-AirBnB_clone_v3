@@ -76,9 +76,11 @@ def put_state(state_id):
 
     ignore = ['id', 'created_at', 'updated_at']
 
-    data = request.gviewset_json()
+    data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
             setattr(state, key, value)
     storage.save()
     return make_response(jsonify(state.to_dict()), 200)
+
+

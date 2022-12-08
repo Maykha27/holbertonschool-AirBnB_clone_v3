@@ -1,29 +1,39 @@
 #!/usr/bin/python3
-"""Flask server (variable app)
+"""
+    runs flask server
 """
 
-
-from flask import Flask, jsonify
-from models import storage
-from os import getenv
+from flask import Flask
 from api.v1.views import app_views
+from os import getenv
+from models import storage
 
 app = Flask(__name__)
+
 app.register_blueprint(app_views)
-app.url_map.strict_slashes = False
 
-
-@app.teardown_appcontext
-def downtear(self):
-    """Status of your API"""
+@app.teardown_appcontext(storage.close)
+def close():
+    """close session when finished"""
     storage.close()
 
+@app.errorhandler(404)
+def invalid_route(e):
+    """handle 404 error"""
+    return ({"error": "Not found"}, 404)
 
 if __name__ == "__main__":
-    host = getenv('HBNB_API_HOST')
-    port = getenv('HBNB_API_PORT')
-    if not host:
+    if getenv('HBNB_API_HOST'):
+        host = getenv('HBNB_API_HOST')
+    else:
         host = '0.0.0.0'
-    if not port:
+
+    if getenv('HBNB_API_PORT'):
+        port = getenv('HBNB_API_PORT')
+    else:
         port = '5000'
-    app.run(host=host, port=port, threaded=True, debug=True)
+
+    app.run(threaded=True, host = host, port = port, debug = True)
+
+
+
