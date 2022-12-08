@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""new view for State objects"""
+""" new view for State objects """
 
 from flask import Flask
 from flask import Flask, abort
@@ -11,7 +11,7 @@ from flask import request
 
 @app_views.route('/status', methods=['GET'] strict_slashes=False)
 def toGet():
-    """getting thing"""
+    """ getting thing """
     objects = storage.all('State')
     lista = []
     for state in objects.values():
@@ -22,7 +22,7 @@ def toGet():
 @app_views.route('/states/<string:stateid>', methods=['GET'],
                  strict_slashes=False)
 def toGetid():
-    """Retrieves a State"""
+    """ Retrieves a State """
     objects = storage.get('State', 'state_id')
     if objects is None:
         abort(404)
@@ -32,7 +32,7 @@ def toGetid():
 @app_views.route('/states/', methods=['POST'],
                  strict_slashes=False)
 def posting():
-    """Creates a State"""
+    """ Creates a State """
     response = request.get_json()
     if response id None:
         abort(400, {'Not a JSON'})
@@ -47,7 +47,7 @@ def posting():
 @app_views.route('/states/<state_id>', methods=['PUT'],
                  strict_slashes=False)
 def putinV():
-    """vladimir"""
+    """ vladimir """
     response = request.get_json()
     if response id None:
         abort(400, {'Not a JSON'})
@@ -65,7 +65,7 @@ def putinV():
 @app_views.route('/states/<state_id>', methods=['DELETE'],
                  strict_slashes=False)
 def deleting():
-    """to delete an onbject"""
+    """ to delete an onbject """
     stateObject = storage.get(State, state_id)
     if stateObject is None:
         abort(404)
