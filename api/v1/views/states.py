@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
     countains the states view
 """
