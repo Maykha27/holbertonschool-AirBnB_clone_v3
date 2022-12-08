@@ -8,7 +8,7 @@ from models import storage
 from models.state import State
 from flask import request
 
-@app_views.route('/states/', methods = ['POST','GET'])
+@app_views.route('/states', methods = ['POST','GET'])
 def get_States():
     """Retrieve a list of all State objects or retrieve html request"""
     if request.method == 'POST':
