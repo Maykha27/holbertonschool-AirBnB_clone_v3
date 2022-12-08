@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" objects that handle all default RestFul API actions for cities """
+"""objects that handle all default RestFul API actions for cities"""
 from models.city import City
 from models.state import State
 from models import storage
@@ -12,7 +12,7 @@ from flasgger.utils import swag_from
                  strict_slashes=False)
 @swag_from('documentation/city/cities_by_state.yml', methods=['GET'])
 def get_cities(state_id):
-    """ The list of all cities objects of a specific State """
+    """The list of all cities objects of a specific State"""
     list_cities = []
     state = storage.get(State, state_id)
     if not state:
@@ -26,7 +26,7 @@ def get_cities(state_id):
 @app_views.route('/cities/<city_id>/', methods=['GET'], strict_slashes=False)
 @swag_from('documentation/city/get_city.yml', methods=['GET'])
 def get_city(city_id):
-    """ Retrieves a specific city based on id """
+    """Retrieves a specific city based on id"""
     city = storage.get(City, city_id)
     if not city:
         abort(404)
@@ -36,7 +36,7 @@ def get_city(city_id):
 @app_views.route('/cities/<city_id>', methods=['DELETE'], strict_slashes=False)
 @swag_from('documentation/city/delete_city.yml', methods=['DELETE'])
 def delete_city(city_id):
-    """ Deletes a city based on id provided """
+    """Deletes a city based on id provided"""
     city = storage.get(City, city_id)
 
     if not city:
@@ -51,7 +51,7 @@ def delete_city(city_id):
                  strict_slashes=False)
 @swag_from('documentation/city/post_city.yml', methods=['POST'])
 def post_city(state_id):
-    """ Creates a City """
+    """Creates a City"""
     state = storage.get(State, state_id)
     if not state:
         abort(404)
@@ -70,7 +70,7 @@ def post_city(state_id):
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
 @swag_from('documentation/city/put_city.yml', methods=['PUT'])
 def put_city(city_id):
-    """ Updates a City """
+    """Updates a City"""
     city = storage.get(City, city_id)
     if not city:
         abort(404)
