@@ -80,9 +80,9 @@ class DBStorage:
         """count the number of objects in storage"""
         return len(self.all(cls))
 
-    def close(self, other=None):
+    def close(self, f=None):
         """call remove() method on the private session attribute"""
-        if other:
-            print(other)
+        if f:
+            f()
         self.__session.remove()
 
