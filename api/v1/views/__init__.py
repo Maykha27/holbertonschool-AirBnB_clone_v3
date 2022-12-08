@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Create a folder views inside v1"""
+""" Create a folder views inside v1 """
 
 from flask import Blueprint
 
