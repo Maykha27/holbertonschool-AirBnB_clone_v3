@@ -9,24 +9,25 @@ from models.state import State
 from flask import request
 import json
 
-@app_views.route('/states/', methods = ['POST','GET'])
-def get_States():
+@app_views.route('/states/', methods = ['POST'])
+def post_States():
     """Retrieve a list of all State objects or retrieve html request"""
-    if request.method == 'POST':
-        dict = request.get_json()
-        if dict is None:
-            return ("Not a JSON"), 400
-        if dict['name'] is None:
-            return ("Missing name"), 400
-        new_state = State(**dict)
-        storage.save()
-        return (new_state.to_dict()), 201
-    else:
-        states_list = []
-        print("ok")
-        for state in storage.all('State').values():
-            states_list.append(state.to_dict())
-        return (json.dumps(states_list))
+    dict = request.get_json()
+    if dict is None:
+        return ("Not a JSON"), 400
+    if dict['name'] is None:
+        return ("Missing name"), 400
+    new_state = State(**dict)
+    storage.save()
+    return (new_state.to_dict()), 201
+
+@app_views.route('/states/')
+def get_States():
+    return (1)
+    states_list = []
+    for state in storage.all('State').values():
+        states_list.append(state.to_dict())
+    return (states_list)
 
 for state in storage.all('State').values():
     @app_views.route('/states/' + state.id, methods = ['PUT', 'DELETE','GET'])
